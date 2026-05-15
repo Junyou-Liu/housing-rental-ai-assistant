@@ -28,7 +28,7 @@ flyway:
 
 app:
   security:
-    jwt-secret: ${APP_SECURITY_JWT_SECRET:change-me-please-change-me-please-change-me}
+    jwt-secret: ${APP_SECURITY_JWT_SECRET:local-development-jwt-secret-minimum-32-chars}
     jwt-expiration-minutes: ${APP_SECURITY_JWT_EXPIRATION_MINUTES:120}
   openai:
     api-key: ${OPENAI_API_KEY:}
@@ -37,5 +37,4 @@ app:
     embedding-model: text-embedding-3-small
     index-dir: ${APP_RAG_INDEX_DIR:./data/vector-index}
     upload-dir: ${APP_RAG_UPLOAD_DIR:./data/uploads}
-
 

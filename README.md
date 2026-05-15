@@ -16,14 +16,14 @@ The repository combines the original frontend and backend code into one reviewab
 
 ```mermaid
 flowchart LR
-  U[\"User\"] --> F[\"React + TypeScript frontend\"]
-  F -->|REST / SSE| B[\"Spring Boot backend\"]
-  B --> A[\"JWT auth + role control\"]
-  B --> D[\"Document parser<br/>PDFBox + Apache POI\"]
-  D --> E[\"OpenAI embeddings\"]
-  E --> V[\"In-memory vector store\"]
-  B --> R[\"RAG retrieval + GPT answer\"]
-  B --> M[\"MySQL<br/>users, documents, chats, messages\"]
+  U["User"] --> F["React + TypeScript frontend"]
+  F -->|REST / SSE| B["Spring Boot backend"]
+  B --> A["JWT auth + role control"]
+  B --> D["Document parser: PDFBox + Apache POI"]
+  D --> E["OpenAI embeddings"]
+  E --> V["In-memory vector store"]
+  B --> R["RAG retrieval + GPT answer"]
+  B --> M["MySQL: users, documents, chats, messages"]
 ```
 
 ## Tech Stack
