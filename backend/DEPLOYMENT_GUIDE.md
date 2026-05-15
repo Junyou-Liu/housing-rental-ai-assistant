@@ -68,13 +68,13 @@ git clone <your-repository-url> .
 cd /opt/rag-app
 cat > .env << 'EOF'
 # MySQL Configuration
-MYSQL_ROOT_PASSWORD=YourStrongRootPassword123!
+MYSQL_ROOT_PASSWORD=
 MYSQL_DATABASE=rag_chat
 MYSQL_USER=rag_user
-MYSQL_PASSWORD=YourStrongPassword123!
+MYSQL_PASSWORD=
 
 # OpenAI API Key
-OPENAI_API_KEY=sk-proj-your-openai-api-key-here
+OPENAI_API_KEY=
 
 # Proxy Configuration (if needed)
 # HTTP_PROXY=http://proxy.example.com:8080
@@ -525,4 +525,3 @@ echo "Access URL: http://$(hostname -I | awk '{print $1}')"
 4. `.env` file contains sensitive information, do not commit to Git
 5. Regularly backup database and uploaded files
 6. Monitor logs and system resource usage
-

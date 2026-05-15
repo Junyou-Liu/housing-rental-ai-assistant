@@ -133,14 +133,16 @@ Database (MySQL)
    ```bash
    export SPRING_DATASOURCE_URL='jdbc:mysql://localhost:3306/rag_chat?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8'
    export SPRING_DATASOURCE_USERNAME='root'
-   export SPRING_DATASOURCE_PASSWORD='your_password'
+   read -s SPRING_DATASOURCE_PASSWORD
+   export SPRING_DATASOURCE_PASSWORD
    ```
 
 3. **Set Environment Variables**
    
    Set your OpenAI API key:
    ```bash
-   export OPENAI_API_KEY=sk-your-api-key-here
+   read -s OPENAI_API_KEY
+   export OPENAI_API_KEY
    ```
    
    Keep the key out of source control. The application reads `OPENAI_API_KEY` at startup.
@@ -219,4 +221,3 @@ For detailed deployment steps, see the root-level [README.md](../README.md).
 ## License
 
 This project is part of a capstone project for DSS5105.
-
