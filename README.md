@@ -1,18 +1,35 @@
 # Housing Rental AI Assistant
 
-This repository preserves a team capstone project for a document-grounded rental consultation assistant. The system lets users upload rental documents, policies, house rules, or other knowledge-base files, then ask questions and receive answers grounded in retrieved source context.
+A RAG-based rental document assistant supporting PDF parsing, source-grounded answers, and streaming responses.
 
-The repository combines the original frontend and backend code into one reviewable project so the product flow, API design, RAG logic, and deployment path can be inspected together.
+This is an academic AI application project focused on document interpretation, citation traceability, and user-facing workflow design. It preserves a team capstone project in a reviewable full-stack repository.
 
-## What This Project Shows
+## Project Overview
 
-- A practical RAG workflow: document parsing, chunking, embeddings, retrieval, answer generation, and source references.
-- A full user flow: authentication, role-based document management, chat sessions, streaming responses, and bilingual UI.
-- Backend persistence for users, documents, chat sessions, messages, and document metadata in MySQL.
-- Engineering structure with Spring Boot, React, Flyway migrations, Docker Compose, and Nginx reverse proxying.
-- Clear project boundary: this is a team course project and should not be presented as a single-person production system.
+The system lets users upload rental documents, policies, house rules, or other knowledge-base files, then ask questions and receive answers grounded in retrieved source context. The repository combines the original frontend and backend code so the product flow, API design, RAG logic, and deployment path can be inspected together.
 
-## Architecture
+For finance, risk, or fintech interviews, the strongest angle is not pure software engineering. It is the ability to structure a document-heavy workflow, design answer traceability, evaluate model outputs, and connect AI tools with practical user needs.
+
+## Tech Stack
+
+| Layer | Main Tools |
+| --- | --- |
+| Frontend | React 19, TypeScript, Vite, Tailwind CSS, React Router, Axios, React Markdown, i18next |
+| Backend | Java 17, Spring Boot 3.3, Spring Security, MyBatis, Flyway |
+| AI / RAG | LangChain4j, OpenAI GPT-4o-mini, text-embedding-3-small, in-memory embedding store |
+| Data | MySQL 8.x |
+| Deployment | Docker Compose, Nginx reverse proxy |
+
+## Key Features
+
+- Multi-format document upload and parsing for rental-related knowledge files.
+- PDF and Office document extraction through PDFBox and Apache POI.
+- Retrieval-augmented generation with chunking, embeddings, and source references.
+- Chat sessions with message history and streaming responses.
+- Role-based document management and JWT authentication.
+- Bilingual UI support and a complete local deployment path.
+
+## Methodology
 
 ```mermaid
 flowchart LR
@@ -26,39 +43,23 @@ flowchart LR
   B --> M["MySQL: users, documents, chats, messages"]
 ```
 
-## Tech Stack
+1. Admin users upload rental documents or policy files.
+2. The backend extracts text, stores metadata, and chunks the parsed content.
+3. Chunks are embedded and indexed in the in-memory vector store.
+4. User questions retrieve relevant chunks and recent chat context.
+5. The model generates a response grounded in retrieved source material.
+6. The frontend streams the answer and displays referenced source documents.
 
-| Layer | Main Tools |
-| --- | --- |
-| Frontend | React 19, TypeScript, Vite, Tailwind CSS, React Router, Axios, React Markdown, i18next |
-| Backend | Java 17, Spring Boot 3.3, Spring Security, MyBatis, Flyway |
-| AI/RAG | LangChain4j, OpenAI GPT-4o-mini, text-embedding-3-small, in-memory embedding store |
-| Data | MySQL 8.x |
-| Deployment | Docker Compose, Nginx reverse proxy |
+## Results / Metrics
 
-## Repository Layout
+- Completed a reviewable end-to-end course prototype covering frontend, backend, database, RAG logic, and Docker-based deployment.
+- Course-facing evaluation reported answer faithfulness of 0.93 using an LLM-as-a-Judge style assessment.
+- Demonstrated source-grounded answer design for rental contract and policy interpretation scenarios.
+- Preserved original project evidence and team-source references for review.
 
-```text
-.
-|-- backend/              # Spring Boot RAG API
-|-- frontend/             # React/Vite web app
-|-- docs/                 # Course deliverables and project evidence
-|-- docker-compose.yml    # Local full-stack deployment
-`-- .env.example          # Environment template with blank secrets
-```
+## How to Run
 
-## Main API Surface
-
-| Area | Endpoint |
-| --- | --- |
-| Health | `GET /api/health` |
-| Auth | `POST /api/auth/register`, `POST /api/auth/login` |
-| Documents | `POST /api/docs/upload`, `GET /api/docs`, `GET /api/docs/{id}`, `GET /api/docs/{id}/content`, `DELETE /api/docs/{id}` |
-| Chat | `POST /api/chat/create`, `GET /api/chat/list`, `GET /api/chat/{chatId}/history`, `POST /api/chat/{chatId}/send`, `POST /api/chat/{chatId}/stream` |
-
-## Run Locally With Docker
-
-Prerequisites: Docker, Docker Compose, and an OpenAI API key.
+Prerequisites: Docker, Docker Compose, Node.js, and an OpenAI API key.
 
 ```bash
 cp .env.example .env
@@ -84,13 +85,16 @@ Backend health check:
 curl http://localhost:8080/api/health
 ```
 
-## Demo Flow
+## Repository Structure
 
-1. Register an admin account.
-2. Upload a rental policy, tenancy agreement, or house-rules document.
-3. Create a chat session.
-4. Ask contract, deposit, repair, or policy questions.
-5. Review the streamed answer and referenced source documents.
+```text
+.
+|-- backend/              # Spring Boot RAG API
+|-- frontend/             # React/Vite web app
+|-- docs/                 # Course deliverables and project evidence
+|-- docker-compose.yml    # Local full-stack deployment
+`-- .env.example          # Environment template with blank secrets
+```
 
 ## Project Evidence
 
@@ -98,13 +102,10 @@ curl http://localhost:8080/api/health
 - Original frontend repository: <https://github.com/M-Downey/5105-Capstone-frontend>
 - Course deliverables are preserved under `docs/`.
 
-## Scope and Limits
+## Limitations
 
-- The current vector store is in memory. Uploaded files are re-indexed on backend startup from the configured upload directory.
-- A production deployment should use a persistent vector database and stricter document-level permissions.
-- GitHub Pages can host only the static frontend. The full app needs a backend, MySQL, and OpenAI API access.
+- This is a team course project and should not be presented as a single-person production system.
+- The current vector store is in memory; a production version should use persistent vector storage.
+- Full operation requires backend services, MySQL, and OpenAI API access. GitHub Pages can host only the static frontend.
+- A production deployment should add stricter document-level permissions, monitoring, backup policy, and secret management.
 - Do not commit `.env` or any API keys.
-
-## Interview Angle
-
-For finance, risk, or fintech roles, this project is best used to show product thinking, document-grounded AI workflow design, source traceability, and system-level understanding. It should not be framed as a pure software-engineering role claim.
